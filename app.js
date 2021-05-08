@@ -1,4 +1,5 @@
 
+const currenteDateContainer = document.querySelector('#currenteDate')
 const timeLeftContainer = document.querySelector('#timeLeft');
 const secondsContainer = document.querySelector('#seconds');
 const minutesContainer = document.querySelector('#minutes');
@@ -14,7 +15,7 @@ const periodInDays = 50;
 const caregivers = ["Marcos", "Marcelo", "Márcia"];
 
 
-nextYearContainer.textContent = caregivers[0];
+// nextYearContainer.textContent = caregivers[0];
 
 function monthData(mes, ano) {
     var howManyDays = new Date(ano, mes, 0);
@@ -27,11 +28,19 @@ const [howManyDays, monthsFirstDay] = monthData(2, 2021);
 
 console.log(howManyDays, monthsFirstDay);
 
+const getTimeUnit = unit => unit < 10 ? "0" + unit : unit
+
+const currentDate = new Date();
+
+currenteDateContainer.textContent = 
+    getTimeUnit(currentDate.getDate()) + "/" + 
+    getTimeUnit(currentDate.getMonth() + 1) + "/" +
+    currentDate.getFullYear();
+
 timeLeftContainer.textContent = `Tempo restante na casa de ${caregivers[0]}`;
 
 // nextYearContainer.textContent = nextYear;
 
-const getTimeUnit = unit => unit < 10 ? "0" + unit : unit
 
 const insertCountdownValues = ({days, hours, minutes, seconds}) => {
     secondsContainer.textContent = getTimeUnit(seconds);
