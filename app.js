@@ -29,9 +29,9 @@ const [howManyDays, monthsFirstDay] = monthData(2, 2021);
 
 // console.log(howManyDays, monthsFirstDay);
 
-const initialTime = new Date("05 10 2021 16:42:00");
-const finalDate = new Date(Date.parse(initialTime) + periodInMilliseconds);
-console.log(finalDate);
+const initialTime = new Date("05 10 2021 17:24:00");
+const finalDateToSwitch = new Date(Date.parse(initialTime) + periodInMilliseconds);
+console.log(finalDateToSwitch);
 
 const getTimeUnit = unit => unit < 10 ? "0" + unit : unit
 
@@ -53,14 +53,21 @@ const insertCountdownValues = ({days, hours, minutes, seconds}) => {
     hoursContainer.textContent = getTimeUnit(hours);
     daysContainer.textContent = getTimeUnit(days);
 }
-
+var teste = "teste" //global
 const updateCountdown = () => {
     const currentTime = new Date();
-    const difference =  finalDate - currentTime;
+    const difference =  finalDateToSwitch - currentTime;
     const days = Math.floor(difference / 1000 / 60 / 60 / 24);
     const hours = Math.floor(difference / 1000 / 60 / 60) % 24;
     const minutes = Math.floor(difference / 1000 / 60) % 60;
     const seconds = Math.floor(difference / 1000) % 60;
+
+    console.log(difference, teste);
+    teste = "teste2" //mudou global
+
+    if (days == 0 & hours == 0 & minutes == 0 & seconds == 0) {
+        console.log("troca")
+    }
 
     insertCountdownValues({days, hours, minutes, seconds})
 };
