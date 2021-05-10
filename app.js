@@ -5,13 +5,14 @@ const secondsContainer = document.querySelector('#seconds');
 const minutesContainer = document.querySelector('#minutes');
 const hoursContainer = document.querySelector('#hours');
 const daysContainer = document.querySelector('#days');
-const nextYearContainer = document.querySelector('#year');
+// const nextYearContainer = document.querySelector('#year');
 const spinnerLoading = document.querySelector('#loading');
 const countdownContainer = document.querySelector('#countdown');
 
 const nextYear = new Date().getFullYear() + 1;
-const newYearTime = new Date(`january 01 ${nextYear} 00:00:00`);
-const periodInDays = 50;
+const newYearTime = new Date(`01 01 ${nextYear} 00:00:00`);
+const periodInMilliseconds = 0.0001 * 24 * 60 * 60 * 1000;
+console.log(periodInMilliseconds);
 const caregivers = ["Marcos", "Marcelo", "Márcia"];
 
 
@@ -26,7 +27,11 @@ function monthData(mes, ano) {
 
 const [howManyDays, monthsFirstDay] = monthData(2, 2021);
 
-console.log(howManyDays, monthsFirstDay);
+// console.log(howManyDays, monthsFirstDay);
+
+const initialTime = new Date("05 10 2021 16:42:00");
+const finalDate = new Date(Date.parse(initialTime) + periodInMilliseconds);
+console.log(finalDate);
 
 const getTimeUnit = unit => unit < 10 ? "0" + unit : unit
 
@@ -37,7 +42,7 @@ currenteDateContainer.textContent =
     getTimeUnit(currentDate.getMonth() + 1) + "/" +
     currentDate.getFullYear();
 
-timeLeftContainer.textContent = `Tempo restante na casa de ${caregivers[0]}`;
+timeLeftContainer.textContent = `Tempo restante com ${caregivers[0]}`;
 
 // nextYearContainer.textContent = nextYear;
 
@@ -51,7 +56,7 @@ const insertCountdownValues = ({days, hours, minutes, seconds}) => {
 
 const updateCountdown = () => {
     const currentTime = new Date();
-    const difference = newYearTime - currentTime;
+    const difference =  finalDate - currentTime;
     const days = Math.floor(difference / 1000 / 60 / 60 / 24);
     const hours = Math.floor(difference / 1000 / 60 / 60) % 24;
     const minutes = Math.floor(difference / 1000 / 60) % 60;
