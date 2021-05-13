@@ -14,6 +14,11 @@ const initialTime = new Date("05 13 2021 14:18:00");
 var finalDateToSwitch = new Date(Date.parse(initialTime) + periodInMilliseconds);
 
 
+const currentCaregiver = (caregivers, initialTime, period, finalDateToSwitch) => {
+
+}
+
+
 // Testing of aquisiting datas
 
 function monthData(mes, ano) {
