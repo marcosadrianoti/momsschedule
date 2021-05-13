@@ -1,22 +1,20 @@
 
 const currenteDateContainer = document.querySelector('#currenteDate')
-const timeLeftContainer = document.querySelector('#timeLeft');
+const currentCaregiverContainer = document.querySelector('#currentCaregiver');
 const secondsContainer = document.querySelector('#seconds');
 const minutesContainer = document.querySelector('#minutes');
 const hoursContainer = document.querySelector('#hours');
 const daysContainer = document.querySelector('#days');
-// const nextYearContainer = document.querySelector('#year');
 const spinnerLoading = document.querySelector('#loading');
 const countdownContainer = document.querySelector('#countdown');
 
-const nextYear = new Date().getFullYear() + 1;
-const newYearTime = new Date(`01 01 ${nextYear} 00:00:00`);
 const periodInMilliseconds = 0.0001 * 24 * 60 * 60 * 1000;
-console.log(periodInMilliseconds);
 const caregivers = ["Marcos", "Marcelo", "Márcia"];
+const initialTime = new Date("05 13 2021 14:18:00");
+var finalDateToSwitch = new Date(Date.parse(initialTime) + periodInMilliseconds);
 
 
-// nextYearContainer.textContent = caregivers[0];
+// Testing of aquisiting datas
 
 function monthData(mes, ano) {
     var howManyDays = new Date(ano, mes, 0);
@@ -27,11 +25,7 @@ function monthData(mes, ano) {
 
 const [howManyDays, monthsFirstDay] = monthData(2, 2021);
 
-// console.log(howManyDays, monthsFirstDay);
 
-const initialTime = new Date("05 10 2021 17:24:00");
-const finalDateToSwitch = new Date(Date.parse(initialTime) + periodInMilliseconds);
-console.log(finalDateToSwitch);
 
 const getTimeUnit = unit => unit < 10 ? "0" + unit : unit
 
@@ -42,9 +36,7 @@ currenteDateContainer.textContent =
     getTimeUnit(currentDate.getMonth() + 1) + "/" +
     currentDate.getFullYear();
 
-timeLeftContainer.textContent = `Tempo restante com ${caregivers[0]}`;
-
-// nextYearContainer.textContent = nextYear;
+    currentCaregiverContainer.textContent = `Tempo restante com ${caregivers[0]}`;
 
 
 const insertCountdownValues = ({days, hours, minutes, seconds}) => {
@@ -67,6 +59,8 @@ const updateCountdown = () => {
 
     if (days == 0 & hours == 0 & minutes == 0 & seconds == 0) {
         console.log("troca")
+        finalDateToSwitch = new Date(Date.parse(currentTime) + periodInMilliseconds);
+        currentCaregiverContainer.textContent = `Tempo restante com ${caregivers[1]}`;
     }
 
     insertCountdownValues({days, hours, minutes, seconds})
